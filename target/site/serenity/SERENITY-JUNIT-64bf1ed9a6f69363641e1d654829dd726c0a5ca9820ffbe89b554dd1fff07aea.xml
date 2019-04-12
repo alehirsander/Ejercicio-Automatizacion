@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?><testsuite errors="1" failures="0" name="Login in trainig site" skipped="0" tests="1" time="41.93" timestamp="2019-04-09 01:45:45"><testcase name="Filters Successful"><error type="java.lang.NullPointerException"/><system-err>null&#13;
+com.qvision.ejerciciofinalautomatizacion.stepdefinitions.FilterStepDefinitions.iIFilterByWages(FilterStepDefinitions.java:38)&#13;
+✽.I filter by wages(src/test/resources/features/filter.feature:12)&#13;
+</system-err></testcase></testsuite>
