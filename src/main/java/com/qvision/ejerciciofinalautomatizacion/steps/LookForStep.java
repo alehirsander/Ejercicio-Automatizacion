@@ -20,8 +20,8 @@ public class LookForStep {
 		
 	}
 	@Step
-	public void filterByWages() {
-		pageFilters.filterByWages();
+	public void filterByWages(String dateRange,String workArea) {
+		pageFilters.filterByWages(dateRange,workArea);
 		
 	}
 	@Step

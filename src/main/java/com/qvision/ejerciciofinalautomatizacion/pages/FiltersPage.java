@@ -29,7 +29,12 @@ public class FiltersPage extends PageObject {
 	JavaScriptExecutor ejecutor1;
 	@FindBy(xpath = "/html/body/div[8]/div[2]/h1")
 	WebElement lblSubTitle;
-	//@FindBy(xpath = "//div[contains(@class, 'js-filter-salary')]/div")
+	@FindBy(xpath = "//div[contains(@class,'radio-options ee-mod js-filter-date-published')]/div")
+	List<WebElement> raListDates;
+	@FindBy(name = "PublishDatesInfo1")
+	List<WebElement> raListPublishDates;
+	
+	
 	@FindBy(xpath ="div[contains(@class, 'checkbox')]/label")
 	List<WebElement> txtListaSalarios;
 	@FindBy(id="salary3")
@@ -50,53 +55,58 @@ public class FiltersPage extends PageObject {
 	@FindBy(xpath="//span[contains(@class, 'info-company-name')]")
 	List<WebElement> lblListCompany;
 	
-	public void filterByWages() {
+	public void filterByWages(String dateRange,String workArea) {
 		
-		int i = 0;
-		try {
+		int i = 0,t=0;
+	try {
 		WebDriver miDriver= getDriver();
 		
 		JavascriptExecutor ejecutar= (JavascriptExecutor) miDriver;
+		
 		ejecutar.executeScript("window.scrollBy(0,100)");
 		cheSalary.click();
 		
-			Thread.sleep(5000);
-		//WebDriverWait myWaitVar = new WebDriverWait(miDriver,30);
-		
-	ejecutar.executeScript("window.scrollBy(0,1000)");
+		Thread.sleep(5000);
+		//WebDriverWait myWaitVar = new WebDriverWait(miDriver,5000);
+		ejecutar.executeScript("window.scrollBy(0,1000)");
 		//myWaitVar.until(ExpectedConditions.visibilityOfElementLocated(By.id("publishDate1")));
 
-		raDatePublication.click();
+		for (WebElement radio : raListDates) {
+				if (radio.getText().contains(dateRange)) {
+		        	
+		        	for (WebElement lista:raListPublishDates) {
+		        		//System.out.println(lista.getText());
+		        		if (t==i) {
+		        			lista.click();
+		        			break;
+		        		}
+		        		t++;
+		        	}
+		        	break;
+		        }
+				i++;
+        }	
+	
+	
 		//myWaitVar.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"WorkAreaFilter1\"]/option")));
 		Thread.sleep(5000);
+		ejecutar.executeScript("window.scrollBy(0,500)");
+		//Capturar área de trabajo
 		
-		//raDatePublication=miDriver.findElement(By.id("publishDate1"));
-		//ejecutar.executeScript("argument[0].click();", raDatePublication);
-		/*for (WebElement listDate:listRaPublishDate ) {
-			System.out.println("ListaDe fechas:"+listDate.getText());
-			System.out.println("ListaDe fechas:"+listDate.getAttribute("value"));
+		for (WebElement listArea:txtListEmployArea ) {
+			System.out.println("Valor de la lista de arear de trabajo:"+listArea.getText());
 			
-			if (listDate.getText().contains("Hace 1 semana")) {
-				listDate.click();
+			if (listArea.getText().contains(workArea)) {
+				listArea.click();
 				break;
 			}
-		}*/
-		//Capturar la lista de empleo
-		ejecutar.executeScript("window.scrollBy(0,500)");
-	for (WebElement listArea:txtListEmployArea ) {
-		System.out.println("Valor de la lista de arear de trabajo:"+listArea.getText());
-		
-		if (listArea.getText().contains("Administrativa y Financiera")) {
-			listArea.click();
-			break;
 		}
+	} catch (InterruptedException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
 	}
 		
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+}
 	
 	public void saveFileWithJobOffersGenerated() {
 		int i;

@@ -8,5 +8,7 @@ Feature: to Look for employment by
       | skill    | city   |
       | Contador | Bogotá |
     When I filter by wages
+    	| dateRange    | workArea   |
+      | Hace 1 semana| Administrativa y Financiera |
     Then I save the job offers into a file
     And  I take Screenshot

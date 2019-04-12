@@ -34,8 +34,11 @@ public class LookForStepDefinitions {
 	}
 
 	@When("^I filter by wages$")
-	public void iFilterByWages() {
-		stepLookFor.filterByWages();
+	public void iFilterByWages(DataTable arg2) {
+		   List<Map<String, String>> listData = arg2.asMaps(String.class, String.class);
+		    String dateRange = listData.get(0).get("dateRange");
+		    String workArea = listData.get(0).get("workArea");
+		stepLookFor.filterByWages(dateRange,workArea);
 	}
 	
 
